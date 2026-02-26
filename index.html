@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luciene Cakes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #ffe6f0;
+            color: #b30059;
+        }
+
+        /* MENU LATERAL */
+        nav {
+            width: 250px;
+            background-color: #ff66a3;
+            min-height: 100vh;
+            padding-top: 30px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0 20px;
+        }
+
+        nav ul li {
+            margin-bottom: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: block;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #b30059;
+        }
+
+        /* BOTÃO HAMBURGER */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #ff66a3;
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            z-index: 1100;
+            cursor: pointer;
+        }
+
+        /* CONTEÚDO */
+        .content {
+            margin-left: 250px;
+            width: 100%;
+        }
+
+        /* HERO */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                        url('https://readdy.ai/api/search-image?query=elegant%20pink%20birthday%20cake%20with%20white%20frosting%20roses%20and%20delicate%20decorations%20on%20soft%20pastel%20pink%20background%20minimalist%20clean%20aesthetic%20professional%20bakery%20photography%20soft%20lighting%20dreamy%20atmosphere&width=1920&height=1080&seq=hero-cake-bg&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 3.8rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        section {
+            padding: 60px 40px;
+        }
+
+        /* Animação apenas para telas maiores */
+        @media (min-width: 769px) {
+            section {
+                opacity: 0;
+                transform: translateY(40px);
+                transition: all .8s ease;
+            }
+
+            section.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 2px solid #ff99cc;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* CARDS */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h4 {
+            color: #ff3399;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #b30059;
+        }
+
+        section p, section li {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        ul.produtos {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        /* TABELAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        table caption {
+            background-color: #ff66a3;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            font-size: 1.1rem;
+        }
+
+        table thead {
+            background-color: #ffe6f0;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        table th {
+            color: #b30059;
+            font-size: 1rem;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #f2f2f2;
+            transition: background-color 0.3s ease;
+        }
+
+        table tbody tr:hover {
+            background-color: #fff0f6;
+        }
+
+        table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        /* LINKS */
+        a {
+            text-decoration: none;
+            color: #ff3399;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        a:hover {
+            color: #b30059;
+        }
+
+        .contato {
+            color: #ff1493;
+            font-weight: bold;
+        }
+
+        .contato:hover {
+            color: #b30059;
+        }
+
+        /* RODAPÉ */
+        footer {
+            background-color: #ff66a3;
+            color: white;
+            text-align: center;
+            padding: 25px 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            nav {
+                transform: translateX(-100%);
+                width: 220px;
+            }
+
+            nav.active {
+                transform: translateX(0);
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#bolos" onclick="closeMenu()">Bolos</a></li>
+            <li><a href="#kits" onclick="closeMenu()">Kits Festa</a></li>
+            <li><a href="#doces" onclick="closeMenu()">Doces</a></li>
+            <li><a href="#informacoes" onclick="closeMenu()">Informações Importantes</a></li>
+            <li><a href="#contato" onclick="closeMenu()">Contato</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <header>
+            <h1>Luciene Cakes</h1>
+            <p>Deixando as ocasiões mais doces</p>
+        </header>
+
+        <section id="bolos">
+            <h2>Bolos</h2>
+
+            <h3>Massas Disponíveis</h3>
+            <div class="card-grid">
+                <div class="card"><h4>⚪ Massa Branca</h4></div>
+                <div class="card"><h4>⚫ Massa Chocolate</h4></div>
+                <div class="card"><h4>🔴 Red Velvet</h4></div>
+            </div>
+
+            <br><br>
+
+            <h3>Recheios Tradicionais</h3>
+            <div class="card-grid">
+                <div class="card"><h4>Baunilha</h4></div>
+                <div class="card"><h4>Brigadeiro</h4></div>
+                <div class="card"><h4>Leite condensado com coco</h4></div>
+                <div class="card"><h4>Ninho</h4></div>
+                <div class="card"><h4>Quatro leite com Oreo</h4></div>
+                <div class="card"><h4>Brigadeiro de maracujá</h4></div>
+                <div class="card"><h4>Olho de sogra</h4></div>
+                <div class="card"><h4>Coco com abacaxi</h4></div>
+            </div>
+
+            <br><br>
+
+            <h3>Recheios Especiais</h3>
+            <div class="card-grid">
+                <div class="card"><h4>Ninho com morango</h4></div>
+                <div class="card"><h4>Ninho com geleia de morango</h4></div>
+                <div class="card"><h4>Ninho com bombom</h4></div>
+                <div class="card"><h4>Estrogonofe de nozes</h4></div>
+                <div class="card"><h4>Estrogonofe de ouro branco</h4></div>
+                <div class="card"><h4>Brigadeiro com KitKat</h4></div>
+                <div class="card"><h4>Ninho trunfado</h4></div>
+                <div class="card"><h4>Surpresa de uva</h4></div>
+                <div class="card"><h4>Quatro leite com pêssego</h4></div>
+            </div>
+
+            <br><br>
+
+            <h3>Acréscimos</h3>
+            <div class="card-grid">
+                <div class="card"><h4>Bolo Mine</h4><div class="price">+ R$ 8,00</div></div>
+                <div class="card"><h4>Bolo PP</h4><div class="price">+ R$ 10,00</div></div>
+                <div class="card"><h4>Bolo P</h4><div class="price">+ R$ 15,00</div></div>
+                <div class="card"><h4>Bolo M</h4><div class="price">+ R$ 25,00</div></div>
+                <div class="card"><h4>Bolo G</h4><div class="price">+ R$ 35,00</div></div>
+            </div>
+        
+
+            <table>
+              <caption>Massa Chocolate (Redondos)</caption>
+              <thead>
+                <tr>
+                  <th>Tamanho</th>
+                  <th>Fatias</th>
+                  <th>Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Mine (12cm)</td><td>Até 10 fatias</td><td>R$ 65,00</td></tr>
+                <tr><td>PP (15cm)</td><td>Até 15 fatias</td><td>R$ 90,00</td></tr>
+                <tr><td>P (20cm)</td><td>Até 30 fatias</td><td>R$ 130,00</td></tr>
+                <tr><td>M (25cm)</td><td>Até 45 fatias</td><td>R$ 185,00</td></tr>
+                <tr><td>G (30cm)</td><td>Até 85 fatias</td><td>R$ 255,00</td></tr>
+              </tbody>
+            </table>
+
+            <table>
+              <caption>Massa Chocolate (Quadrados)</caption>
+              <thead>
+                <tr>
+                  <th>Tamanho</th>
+                  <th>Fatias</th>
+                  <th>Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>30x22x10</td><td>Até 50 fatias</td><td>R$ 200,00</td></tr>
+                <tr><td>36x26x10</td><td>Até 90 fatias</td><td>R$ 250,00</td></tr>
+              </tbody>
+            </table>
+
+            <table>
+              <caption>Massa Red Velvet (Redondos)</caption>
+              <thead>
+                <tr>
+                  <th>Tamanho</th>
+                  <th>Fatias</th>
+                  <th>Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Mine (12cm)</td><td>Até 10 fatias</td><td>R$ 65,00</td></tr>
+                <tr><td>PP (15cm)</td><td>Até 15 fatias</td><td>R$ 90,00</td></tr>
+                <tr><td>P (20cm)</td><td>Até 30 fatias</td><td>R$ 130,00</td></tr>
+                <tr><td>M (25cm)</td><td>Até 45 fatias</td><td>R$ 185,00</td></tr>
+                <tr><td>G (30cm)</td><td>Até 85 fatias</td><td>R$ 255,00</td></tr>
+              </tbody>
+            </table>
+
+            <table>
+              <caption>Massa Red Velvet (Quadrados)</caption>
+              <thead>
+                <tr>
+                  <th>Tamanho</th>
+                  <th>Fatias</th>
+                  <th>Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>30x22x10</td><td>Até 50 fatias</td><td>R$ 200,00</td></tr>
+                <tr><td>36x26x10</td><td>Até 90 fatias</td><td>R$ 250,00</td></tr>
+              </tbody>
+            </table>
+
+            <table>
+              <caption>Massa Branca (Redondos)</caption>
+              <thead>
+                <tr>
+                  <th>Tamanho</th>
+                  <th>Fatias</th>
+                  <th>Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Mine (12cm)</td><td>Até 10 fatias</td><td>R$ 60,00</td></tr>
+                <tr><td>PP (15cm)</td><td>Até 15 fatias</td><td>R$ 85,00</td></tr>
+                <tr><td>P (20cm)</td><td>Até 30 fatias</td><td>R$ 120,00</td></tr>
+                <tr><td>M (25cm)</td><td>Até 45 fatias</td><td>R$ 180,00</td></tr>
+                <tr><td>G (30cm)</td><td>Até 85 fatias</td><td>R$ 235,00</td></tr>
+              </tbody>
+            </table>
+
+            <table>
+              <caption>Massa Branca (Quadrados)</caption>
+              <thead>
+                <tr>
+                  <th>Tamanho</th>
+                  <th>Fatias</th>
+                  <th>Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>30x22x10</td><td>Até 50 fatias</td><td>R$ 195,00</td></tr>
+                <tr><td>36x26x10</td><td>Até 90 fatias</td><td>R$ 240,00</td></tr>
+              </tbody>
+            </table>
+
+        </section>
+
+        <section id="kits">
+            <h2>Kits</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Kit 1 (5 pessoas)</h4>
+                    <p>1 Bolo 800g<br>10 Docinhos<br>1/2 Torta Salgada<br>10 Mini Pizzas<br>20 Salgadinhos</p>
+                    <div class="price">R$ 130,00</div>
+                </div>
+
+                <div class="card">
+                    <h4>Kit 2 (10 pessoas)</h4>
+                    <p>1 Bolo 1,3kg<br>20 Docinhos<br>1 Torta Salgada<br>20 Mini Pizzas<br>40 Salgadinhos</p>
+                    <div class="price">R$ 200,00</div>
+                </div>
+
+                <div class="card">
+                    <h4>Kit 3 (15 pessoas)</h4>
+                    <p>1 Bolo 1,8kg<br>30 Docinhos<br>1/2 Torta Salgada<br>30 Mini Pizzas<br>80 Salgadinhos</p>
+                    <div class="price">R$ 275,00</div>
+                </div>
+
+                <div class="card">
+                    <h4>Kit 4 (20 pessoas)</h4>
+                    <p>1 Bolo 2,3kg<br>40 Docinhos<br>2 Tortas Salgadas<br>40 Mini Pizzas<br>100 Salgadinhos</p>
+                    <div class="price">R$ 375,00</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="doces">
+  <h2>Doces</h2>
+
+  <h3>Tradicionais</h3>
+  <div class="card-grid">
+    <div class="card">Brigadeiro</div>
+    <div class="card">Beijinho</div>
+    <div class="card">Cajuzinho</div>
+  </div>
+
+  <table>
+    <caption>Valores dos Tradicionais</caption>
+    <thead>
+      <tr>
+        <th>Quantidade</th>
+        <th>Preço</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>25 Unidades</td>
+        <td>R$ 27,00</td>
+      </tr>
+      <tr>
+        <td>50 Unidades</td>
+        <td>R$ 50,00</td>
+      </tr>
+      <tr>
+        <td>100 Unidades</td>
+        <td>R$ 80,00</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Premium</h3>
+  <div class="card-grid">
+    <div class="card">Brigadeiro ao leite</div>
+    <div class="card">Brigadeiro meio amargo</div>
+    <div class="card">Brigadeiro de nozes</div>
+    <div class="card">Brigadeiro de churros</div>
+    <div class="card">Brulle</div>
+    <div class="card">Confete</div>
+    <div class="card">Chapéu de Napoleão</div>
+    <div class="card">Doce de leite com coco queimado</div>
+    <div class="card">Ferrero rocher</div>
+    <div class="card">Ninho aveludado</div>
+    <div class="card">Ninho com nutella</div>
+    <div class="card">Surpresa de uva</div>
+    <div class="card">Olho de sogra</div>
+    <div class="card">Ouriço</div>
+  </div>
+
+  <table>
+    <caption>Valores dos Premium</caption>
+    <thead>
+      <tr>
+        <th>Quantidade</th>
+        <th>Preço</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>25 Unidades</td>
+        <td>R$ 50,00</td>
+      </tr>
+      <tr>
+        <td>50 Unidades</td>
+        <td>R$ 80,00</td>
+      </tr>
+      <tr>
+        <td>100 Unidades</td>
+        <td>R$ 150,00</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+        <section id="doces">
+            <h2>Doces</h2>
+            <ul class="produtos">
+                <li>Brigadeiro Gourmet</li>
+                <li>Beijinho</li>
+                <li>Trufas</li>
+                <li>Copinho da Felicidade</li>
+            </ul>
+        </section>
+
+        <section id="info-importantes">
+    <div class="container">
+      <h2>Informações Importantes!</h2><br>
+      <h5>1°- Caso queira a adição de flores naturais<br>(Ex.: Flores naturais no bolo de casamento),
+        <br>compre e envie as flores para nosso endereço<br>(O endereço será informado durante o pedido).
+      </h5>
+      <br>
+      <h5>2°- Caso queira utilizar Topo de Bolo,<br>esta é uma indicação de onde encomendar.
+        <br>WhatsApp: <a href="https://wa.me/5522999498522" target="_blank" class="contato">Keila Corrêa</a>
+      </h5>
+    </div>
+  </section>
+
+        <section id="contato">
+    <div class="container">
+      <h2>Faça seu Pedido!</h2>
+      <p>Entre em contato pelo WhatsApp: <a href="https://wa.me/5522997471999" target="_blank" class="contato">Clique aqui</a></p>
+      <p>Acesse também o nosso instagram: <a href="https://www.instagram.com/lucienejesus_cakes?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="contato">Clique aqui</a></p>
+      <p>Formas de pagamento: Pix, Dinheiro, Cartão de Débito/Crédito</p>
+      <p>Funcionamento: Segunda a sábado das 9h às 20h | Domingo das 9h às 14h</p>
+      <p id="status-loja"></p>
+    </div>
+  </section>
+
+        <footer>
+          <div class="container">
+            <p>&copy; 2025 Luciene Cakes - Todos os direitos reservados</p>
+          </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll("section");
+        const menu = document.getElementById("menu");
+
+        function activateObserver() {
+
+            if (window.innerWidth > 768) {
+
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("visible");
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+
+            } else {
+                // No celular deixa tudo visível
+                sections.forEach(section => {
+                    section.classList.add("visible");
+                });
+            }
+        }
+
+        activateObserver();
+
+        window.addEventListener("resize", activateObserver);
+
+        function toggleMenu(){
+            menu.classList.toggle("active");
+        }
+
+        function closeMenu(){
+            if(window.innerWidth <= 768){
+                menu.classList.remove("active");
+            }
+        }
+
+        function verificarStatusLoja() {
+            const status = document.getElementById('status-loja');
+            const agora = new Date();
+            const dia = agora.getDay();
+            const hora = agora.getHours();
+            let aberto = false;
+
+            if (dia >= 1 && dia <= 6) {
+                if (hora >= 9 && hora < 20) {
+                aberto = true;
+                }
+            } else if (dia === 0) {
+                if (hora >= 9 && hora < 14) {
+                aberto = true;
+                }
+            }
+
+            if (aberto) {
+                status.textContent = "🟢 Estamos Abertos!";
+                status.classList.add('aberto');
+                status.classList.remove('fechado');
+            } else {
+                status.textContent = "🔴 Estamos Fechados!";
+                status.classList.add('fechado');
+                status.classList.remove('aberto');
+            }
+        }
+
+        verificarStatusLoja();
+        setInterval(verificarStatusLoja, 10);
+    </script>
+
+</body>
+</html>
